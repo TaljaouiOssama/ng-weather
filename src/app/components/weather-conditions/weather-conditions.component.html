@@ -1,0 +1,28 @@
+<div *ngFor="let weather$ of weatherDetails$">
+  <div class="well flex" *ngIf="weather$ | async as weather">
+    <div>
+      <h3>{{ weather?.zipCode }} {{ weather?.name }}</h3>
+      <h4>Current conditions: {{weather?.weather?.[0]?.main}}</h4>
+      <h4>Temperatures today:</h4>
+      <p>
+        Current {{ weather?.main?.temp | kelvinToCelsius }} - Max
+        {{ weather?.main?.temp_max | kelvinToCelsius }} - Min
+        {{ weather?.main?.temp_min | kelvinToCelsius }}
+      </p>
+      <p>
+        <a [routerLink]="['/forecast/', weather?.zipCode]"
+          >Show 5-day forecast for {{ weather?.name }}</a
+        >
+      </p>
+    </div>
+
+    <div>
+      <span class="close">×</span>
+      <img
+        appWeatherImage
+        [alt]="weather?.weather?.[0]?.main"
+        [weatherCondition]="weather?.weather?.[0]?.main ?? '' "
+      />
+    </div>
+  </div>
+</div>

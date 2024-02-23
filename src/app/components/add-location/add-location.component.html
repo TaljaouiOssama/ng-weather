@@ -1,0 +1,33 @@
+<div class="well">
+  <form #zipcodeForm="ngForm" (ngSubmit)="addLocation(zipcodeForm)">
+    <h2>Enter a zipcode:</h2>
+
+    <input
+      class="form-control"
+      placeholder="Zipcode"
+      type="text"
+      name="zip"
+      id="addLocation"
+      required
+      pattern="[0-9]{5}"
+      ngModel
+      #zip="ngModel"
+    />
+    <small
+      class="error"
+      *ngIf="zipcodeForm.invalid && (zipcodeForm.touched || zipcodeForm.dirty)"
+      [style.color]="'red'"
+    >
+      enter valid zip code (5 digits)
+    </small>
+    <br />
+    <button
+      class="btn btn-primary"
+      id="addLocationBtn"
+      [disabled]="zipcodeForm.invalid"
+      type="submit"
+    >
+      Add location
+    </button>
+  </form>
+</div>
